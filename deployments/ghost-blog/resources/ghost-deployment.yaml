@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ghost-blog
+  # namespace: ghost
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ghost-blog
+  template:
+    metadata:
+      labels:
+        app: ghost-blog
+    spec:
+      containers:
+      - image: ghost:5
+        imagePullPolicy: Always #IfNotPresent
+        name: ghost-blog
+        resources:
+          # limits:
+          #   memory: 64Mi
+          #   cpu: 100m
+          request:
+            memory: 64Mi
+            cpu: 100m
+        ports:
+        - containerPort: 2368
+          name: http
+          protocol: TCP
+        env:
+          - name: url
+            value: https://ghost.plasa.cloud
+          - name: database__client
+            value: mysql
+          - name: database__connection__host
+            value: mysql.plasacloud.de
+          - name: database__connection__user
+            value: ghost_blog
+          # - name: database__connection__ssl
+          #   value: "Amazon RDS"
+          - name: database__connection__password
+            valueFrom:
+              secretKeyRef:
+                name: ghost-secrets
+                key: password
+          - name: database__connection__database
+            value: ghost
+        volumeMounts:
+        - mountPath: /var/lib/ghost/content
+          name: ghost-blog-content
+      volumes:
+      - name: ghost-blog-content
+        persistentVolumeClaim:
+          claimName: ghost-blog-content
