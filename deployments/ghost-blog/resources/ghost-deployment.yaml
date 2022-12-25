@@ -4,7 +4,7 @@ metadata:
   name: ghost-blog
   # namespace: ghost
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: ghost-blog
@@ -53,3 +53,17 @@ spec:
       - name: ghost-blog-content
         persistentVolumeClaim:
           claimName: ghost-blog-content
+
+#"mail": {
+#   "transport": "SMTP",
+#   "options": {
+#     "service": "Mailgun",
+#     "host": "smtp.mailgun.org",
+#     "port": 465,
+#     "secure": true,
+#     "auth": {
+#       "user": "postmaster@example.mailgun.org",
+#       "pass": "1234567890"
+#     }
+#   }
+# },
