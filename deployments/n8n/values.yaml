@@ -1,3 +1,5 @@
+# n8n:
+#   encryption_key: #echo -n "key" | base64
 config:
   host: n8n.plasa.cloud
   editorBaseUrl: https://n8n.plasa.cloud
@@ -9,7 +11,7 @@ config:
     type: sqlite
   security: 
     basicAuth:
-      active: true
+      active: false
       user: n8n
       hash: true
       password: "n8n:$2y$05$9aZABvWOYB/kz0Ioz4MJuesmgsncZ5DGtBi65PgBhCqbPRzwOJmA6" # htpasswd -B -n
