@@ -5,6 +5,7 @@ data:
   statusbadge.enabled: 'true'
   users.anonymous.enabled: 'false'
   url: https://argocd.plasa.cloud
+  kustomize.buildOptions: "--enable-helm"
   # configManagementPlugins: |
   #   - name: flux
   #     generate:
