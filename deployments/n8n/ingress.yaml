@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+  labels:
+    app.kubernetes.io/instance: n8n
+    app.kubernetes.io/name: n8n
+  name: n8n
+  namespace: n8n
+spec:
+  
+  rules:
+    - host: n8n.plasa.cloud
+      http:
+        paths:
+          - backend:
+              serviceName: n8n
+              servicePort: 80
+            path: /
+  tls:
+    - hosts:
+        - n8n.plasa.cloud
+      secretName: star-plasa-cloud-tls
